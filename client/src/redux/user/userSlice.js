@@ -13,10 +13,13 @@ const userSlice = createSlice({
     signInStart: (state) => {
       state.loading = true;
     },
+    //action is the data that we are receiving from the database.
+    //we get that data & set it to here.
     signInSuccess: (state, action) => {
+      //this is the data that we get
       state.currentUser = action.payload;
       state.loading = false;
-      state.error = null;
+      state.error = null;//maybe we have error for previous account.So, we are setting it to NULL
     },
     signInFailure: (state, action) => {
       state.error = action.payload;
@@ -26,9 +29,9 @@ const userSlice = createSlice({
       state.loading = true;
     },
     updateUserSuccess: (state, action) => {
-      state.currentUser = action.payload;
+      state.currentUser = action.payload;//action.payload getting from backend as a response
       state.loading = false;
-      state.error = null;
+      state.error = null;//if we have previous errors then we are setting that to null
     },
     updateUserFailure: (state, action) => {
       state.error = action.payload;
@@ -38,7 +41,7 @@ const userSlice = createSlice({
       state.loading = true;
     },
     deleteUserSuccess: (state) => {
-      state.currentUser = null;
+      state.currentUser = null;//It is making current user to null
       state.loading = false;
       state.error = null;
     },

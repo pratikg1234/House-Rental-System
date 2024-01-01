@@ -6,10 +6,13 @@ import {
   signInSuccess,
   signInFailure,
 } from '../redux/user/userSlice';
+
 import OAuth from '../components/OAuth';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
+  //instead of having 2 hooks error & loading . Using useSelector hook we can import these two.
+  //And that is coming from global state & state name called user inside userSlice
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,7 +40,7 @@ export default function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate('/');//we are navigating to homepage when sign-in is completed.
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
@@ -63,7 +66,7 @@ export default function SignIn() {
 
         <button
           disabled={loading}
-          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+          className='bg-orange-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
         >
           {loading ? 'Loading...' : 'Sign In'}
         </button>

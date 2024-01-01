@@ -36,15 +36,18 @@ export default function CreateListing() {
   useEffect(() => {
     const fetchListing = async () => {
       const listingId = params.listingId;
+      //each time when we go to update-listing page we will be having listingId. So, based upon that listingId we will be fetching information. 
       const res = await fetch(`/api/listing/get/${listingId}`);
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);
         return;
       }
+      //updating the form of listing
       setFormData(data);
     };
 
+    //calling async function in the useEffect()
     fetchListing();
   }, []);
 
@@ -139,6 +142,7 @@ export default function CreateListing() {
     }
   };
 
+  //Here we are updating the listing
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -163,6 +167,7 @@ export default function CreateListing() {
       if (data.success === false) {
         setError(data.message);
       }
+      //we are navigating to listing/ to that id
       navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
@@ -172,7 +177,7 @@ export default function CreateListing() {
   return (
     <main className='p-3 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
-        Update a Listing
+        Update a Property
       </h1>
       <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
         <div className='flex flex-col gap-4 flex-1'>
@@ -283,6 +288,32 @@ export default function CreateListing() {
                 value={formData.bathrooms}
               />
               <p>Baths</p>
+            </div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='number'
+                id='halls'
+                min='1'
+                max='1'
+                required
+                className='p-3 border border-gray-300 rounded-lg'
+                onChange={handleChange}
+                value={formData.halls}
+              />
+              <p>Halls</p>
+            </div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='number'
+                id='kitchens'
+                min='1'
+                max='1'
+                required
+                className='p-3 border border-gray-300 rounded-lg'
+                onChange={handleChange}
+                value={formData.kitchens}
+              />
+              <p>kitchens</p>
             </div>
             <div className='flex items-center gap-2'>
               <input

@@ -21,8 +21,10 @@ export default function App() {
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/about' element={<About />} />
         <Route path='/search' element={<Search />} />
+        {/* based on listingId we are fetching the data */}
         <Route path='/listing/:listingId' element={<Listing />} />
 
+        {/* PrivateRoute are accessible only to authenticated users */}
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/create-listing' element={<CreateListing />} />

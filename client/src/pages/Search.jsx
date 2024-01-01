@@ -87,6 +87,7 @@ export default function Search() {
       setSidebardata({
         ...sidebardata,
         [e.target.id]:
+        //if e.target.checked is true or e.target.checked is 'true' then set it to true otherwise false
           e.target.checked || e.target.checked === 'true' ? true : false,
       });
     }
@@ -172,6 +173,7 @@ export default function Search() {
                 id='sale'
                 className='w-5'
                 onChange={handleChange}
+                //this is checked if sidebardata.type is sale
                 checked={sidebardata.type === 'sale'}
               />
               <span>Sale</span>
@@ -182,6 +184,7 @@ export default function Search() {
                 id='offer'
                 className='w-5'
                 onChange={handleChange}
+                //this is checked if sidebardata.offer is true
                 checked={sidebardata.offer}
               />
               <span>Offer</span>
@@ -219,12 +222,12 @@ export default function Search() {
               className='border rounded-lg p-3'
             >
               <option value='regularPrice_desc'>Price high to low</option>
-              <option value='regularPrice_asc'>Price low to hight</option>
+              <option value='regularPrice_asc'>Price low to high</option>
               <option value='createdAt_desc'>Latest</option>
               <option value='createdAt_asc'>Oldest</option>
             </select>
           </div>
-          <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
+          <button className='bg-green-600 text-white p-3 rounded-lg uppercase hover:opacity-95'>
             Search
           </button>
         </form>

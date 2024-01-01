@@ -38,7 +38,7 @@ const listingSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    type: {
+    type: {//type will be rent or sell
       type: String,
       required: true,
     },
@@ -50,11 +50,20 @@ const listingSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
-    userRef: {
+    userRef: {//we wanted to keep track of which user has created listing
       type: String,
       required: true,
     },
-  },
+    halls: {
+      type: Number,
+      required: true,
+    },
+    kitchens: {
+      type: Number,
+      required: true,
+    }
+    
+  },// timestamps: true will store time of creation & updation
   { timestamps: true }
 );
 

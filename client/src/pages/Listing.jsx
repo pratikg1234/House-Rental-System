@@ -16,8 +16,6 @@ import {
 } from 'react-icons/fa';
 import Contact from '../components/Contact';
 
-// https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
-
 export default function Listing() {
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
@@ -32,6 +30,7 @@ export default function Listing() {
     const fetchListing = async () => {
       try {
         setLoading(true);
+        // backtick is used for using variable inside fetch method
         const res = await fetch(`/api/listing/get/${params.listingId}`);
         const data = await res.json();
         if (data.success === false) {
@@ -48,6 +47,7 @@ export default function Listing() {
       }
     };
     fetchListing();
+    //run this only when params.listingId changes
   }, [params.listingId]);
 
   return (
@@ -56,6 +56,7 @@ export default function Listing() {
       {error && (
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
+      {/* if there is listing we are showing that */}
       {listing && !loading && !error && (
         <div>
           <Swiper navigation>
@@ -128,6 +129,18 @@ export default function Listing() {
                   : `${listing.bathrooms} bath `}
               </li>
               <li className='flex items-center gap-1 whitespace-nowrap '>
+                <FaBath className='text-lg' />
+                {listing.halls > 1
+                  ? `${listing.halls} halls `
+                  : `${listing.halls} hall `}
+              </li>
+              <li className='flex items-center gap-1 whitespace-nowrap '>
+                <FaBath className='text-lg' />
+                {listing.kitchens > 1
+                  ? `${listing.kitchens} kitchens `
+                  : `${listing.kitchens} kitchen `}
+              </li>
+              <li className='flex items-center gap-1 whitespace-nowrap '>
                 <FaParking className='text-lg' />
                 {listing.parking ? 'Parking spot' : 'No Parking'}
               </li>
@@ -141,7 +154,7 @@ export default function Listing() {
                 onClick={() => setContact(true)}
                 className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
               >
-                Contact landlord
+                Contact Property Owner
               </button>
             )}
             {contact && <Contact listing={listing} />}
